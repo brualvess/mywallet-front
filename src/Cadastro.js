@@ -1,33 +1,53 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
+import { useState } from 'react';
 
 export default function Cadastro() {
     let navigate = useNavigate()
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("")
+    const [senha, setSenha] = useState("");
+    const [confirmsenha, setConfirmsenha] = useState("")
+    function cadastrar(){
+        const promise = axios.post('https://localhost:5000/cadastro', {
+            name: name,
+            email: email,
+            password: senha,
+            confirmPassword:confirmsenha
+        })
+        promise.catch(tratarError)
+        promise.then(tratarSucesso)
+    }
+    function tratarError(){
+        alert("Preencha os campos corretamente")
+       
+    }
+    function tratarSucesso(){
+        navigate("/registros")
+    }
 
-
-
-    return(
+    return (
         <>
-        <Titulo>
-            <FraseTitulo>
-                MyWallet
-            </FraseTitulo>
-        </Titulo>
-        <Form>
-            <input type='nome' placeholder="Nome" />
-            <input type='email' placeholder="E-mail" />
-            <input type='password' placeholder="Senha" />
-            <input type='password' placeholder="Confirme a senha" />
-            <Botao>
-                <Entrar>Cadastrar</Entrar>
-            </Botao>
-            <Logar onClick={()=>navigate("/")}>Já tem uma conta? Entre agora!</Logar>
-        </Form>
-    </>
+            <Titulo>
+                <FraseTitulo>
+                    MyWallet
+                </FraseTitulo>
+            </Titulo>
+            <Form>
+                <input type='nome' placeholder="Nome"  value={name} onChange={e => setName(e.target.value)} />
+                <input type='email' placeholder="E-mail"  value={email} onChange={e => setEmail(e.target.value)}/>
+                <input type='password' placeholder="Senha" value={senha} onChange={e => setSenha(e.target.value)}/>
+                <input type='password' placeholder="Confirme a senha" value={confirmsenha} onChange={e => setConfirmsenha(e.target.value)} />
+                <Botao>
+                    <Entrar onClick={cadastrar}>Cadastrar</Entrar>
+                </Botao>
+                <Logar onClick={() => navigate("/")}>Já tem uma conta? Entre agora!</Logar>
+            </Form>
+        </>
     )
-}
-
+    }
 const Titulo = styled.div`
 display: flex;
 justify-content: center;

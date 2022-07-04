@@ -19,7 +19,7 @@ export default function Login() {
         promise.then(tratarSucesso)
     }
     function tratarError() {
-        alert("Falha no login")
+        alert("Senha ou e-mail incorretos!")
     }
 
     function tratarSucesso() {
