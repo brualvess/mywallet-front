@@ -1,7 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useNavigate } from "react-router-dom";
 
 export default function Cadastro() {
+    let navigate = useNavigate()
+
+
+
     return(
         <>
         <Titulo>
@@ -17,7 +22,7 @@ export default function Cadastro() {
             <Botao>
                 <Entrar>Cadastrar</Entrar>
             </Botao>
-            <Logar>Já tem uma conta? Entre agora!</Logar>
+            <Logar onClick={()=>navigate("/")}>Já tem uma conta? Entre agora!</Logar>
         </Form>
     </>
     )

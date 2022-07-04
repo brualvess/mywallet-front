@@ -1,23 +1,49 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useNavigate } from "react-router-dom";
+import axios from 'axios';
+import { useState } from 'react';
+
 export default function Login() {
-    return (
-        <>
-            <Titulo>
-                <FraseTitulo>
-                    MyWallet
-                </FraseTitulo>
-            </Titulo>
-            <Form>
-                <input type='email' placeholder="E-mail" />
-                <input type='password' placeholder="Senha" />
-                <Botao>
-                    <Entrar>Entrar</Entrar>
-                </Botao>
-                <Cadastro>Primeira vez ? Cadastre-se!</Cadastro>
-            </Form>
-        </>
-    )
+    let navigate = useNavigate();
+    const [email, setEmail] = useState("");
+    const [senha, setSenha] = useState("");
+    function logar() {
+
+        const promise = axios.post('https://localhost:5000/login', {
+            email: email,
+            password: senha
+        })
+
+        promise.catch(tratarError)
+        promise.then(tratarSucesso)
+    }
+    function tratarError() {
+        alert("Falha no login")
+    }
+
+    function tratarSucesso() {
+        navigate("/registros")
+    }
+
+
+return (
+    <>
+        <Titulo>
+            <FraseTitulo>
+                MyWallet
+            </FraseTitulo>
+        </Titulo>
+        <Form>
+            <input type='email' placeholder="E-mail" value={email} onChange={e => setEmail(e.target.value)}/>
+            <input type='password' placeholder="Senha" value={senha} onChange={e => setSenha(e.target.value)}/>
+            <Botao>
+                <Entrar onClick={logar}>Entrar</Entrar>
+            </Botao>
+            <Cadastro onClick={() => navigate("/cadastro")}>Primeira vez ? Cadastre-se!</Cadastro>
+        </Form>
+    </>
+)
 }
 const Titulo = styled.div`
 display: flex;
