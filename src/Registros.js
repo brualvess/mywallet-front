@@ -14,8 +14,17 @@ export default function Registros() {
                         entrada ou saída
                     </Frase>
                 </Registro>
-
             </Displayf>
+            <Rodape>
+                <Entrada>
+                <ion-icon name="add-circle-outline"></ion-icon>
+                <Textinho>Nova<p></p>entrada</Textinho>
+                </Entrada>
+                <Saida>
+                <ion-icon name="remove-circle-outline"></ion-icon>
+                <Textinho>Nova <p></p> saída</Textinho>
+                </Saida>
+            </Rodape>
         </>
     )
 }
@@ -60,4 +69,47 @@ font-size: 27px;;
 text-align: center;
 color: #868686;
 margin-top: 200px;
+`
+const Rodape = styled.div`
+display: flex;
+justify-content: center;
+margin-top: 60px;
+justify-content: space-around;
+`
+const Entrada = styled.div`
+width: 155px;
+height: 114px;
+background: #A328D6;
+border-radius: 5px;
+ion-icon{
+    background:  #A328D6;;
+    color: #FFFFFF;
+    width: 35%;
+    height: 30px;
+    margin-top : 5px;
+}
+`
+const Saida = styled.div`
+width: 155px;
+height: 114px;
+background: #A328D6;
+border-radius: 5px;
+ion-icon{
+    background:  #A328D6;
+    color: #FFFFFF;
+    width: 35%;
+    height: 30px;
+    margin-top : 5px;
+}
+`
+const Textinho = styled.div`
+font-family: 'Raleway';
+font-style: normal;
+font-weight: 900;
+font-size: 19px;
+color: #FFFFFF;
+margin-left: 10px;
+margin-top: 30px;
+
+
 `
